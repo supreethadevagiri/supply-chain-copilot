@@ -1,0 +1,4 @@
+shipment_id,check_date,risk_rating,cost_pct_estimate,delay_weeks_estimate
+SHP-2201,2026-07-23,Low,0,0
+SHP-2201,2026-07-30,Medium,8,1
+SHP-2202,2026-07-27,Low,0,0

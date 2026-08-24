@@ -1,0 +1,51 @@
+cafe_account_id,cafe_name,contract_priority,committed_bags,monthly_revenue_eur
+CAFE-001,Nordlicht Kaffee,Low,60,3200
+CAFE-002,Sternschanze Roasters,Low,70,3900
+CAFE-003,Alster Kaffeehaus,Low,63,4410
+CAFE-004,Blankenese Kaffeehaus,Medium,53,3922
+CAFE-005,Ottensen Kaffeehaus,High,93,8835
+CAFE-006,Winterhude Kaffeehaus,High,81,10044
+CAFE-007,Barmbek Kaffeehaus,High,33,2739
+CAFE-008,Altona Kaffeehaus,Low,67,7236
+CAFE-009,Eppendorf Kaffeehaus,Medium,34,3264
+CAFE-010,Wandsbek Kaffeehaus,Low,91,7098
+CAFE-011,Harburg Kaffeehaus,High,97,8148
+CAFE-012,Bergedorf Kaffeehaus,Low,81,6804
+CAFE-013,Poppenbuettel Kaffeehaus,Low,59,5605
+CAFE-014,Volksdorf Kaffeehaus,Medium,99,10989
+CAFE-015,Niendorf Kaffeehaus,High,72,9288
+CAFE-016,Bahrenfeld Kaffeehaus,High,43,3526
+CAFE-017,Hoheluft Kaffeehaus,Medium,45,5400
+CAFE-018,Grindel Kaffeehaus,Medium,79,7979
+CAFE-019,Eimsbuettel Kaffeehaus,Medium,60,6480
+CAFE-020,Finkenwerder Kaffeehaus,Medium,48,5664
+CAFE-021,St. Pauli Kaffeehaus,Medium,34,4114
+CAFE-022,Sternschanze Kaffeehaus,High,64,6464
+CAFE-023,Rotherbaum Kaffeehaus,Medium,84,6132
+CAFE-024,Uhlenhorst Kaffeehaus,Medium,90,8910
+CAFE-025,St. Georg Kaffeehaus,Medium,28,2968
+CAFE-026,Elbufer Roastery,Low,20,1840
+CAFE-027,Speicherstadt Roastery,High,27,2916
+CAFE-028,Alster Roastery,Medium,82,9348
+CAFE-029,Blankenese Roastery,Medium,30,2520
+CAFE-030,Ottensen Roastery,High,27,3024
+CAFE-031,Winterhude Roastery,Medium,54,5292
+CAFE-032,Barmbek Roastery,High,54,5670
+CAFE-033,Altona Roastery,High,52,4264
+CAFE-034,Eppendorf Roastery,Low,24,2424
+CAFE-035,Wandsbek Roastery,Low,60,4560
+CAFE-036,Harburg Roastery,Low,47,6016
+CAFE-037,Bergedorf Roastery,Medium,26,3120
+CAFE-038,Poppenbuettel Roastery,High,92,8372
+CAFE-039,Volksdorf Roastery,Low,91,8827
+CAFE-040,Niendorf Roastery,Medium,31,2201
+CAFE-041,Bahrenfeld Roastery,High,53,5883
+CAFE-042,Hoheluft Roastery,Medium,52,5928
+CAFE-043,Grindel Roastery,High,67,8442
+CAFE-044,Eimsbuettel Roastery,Low,42,5124
+CAFE-045,Finkenwerder Roastery,Medium,81,6075
+CAFE-046,St. Pauli Roastery,Low,56,5432
+CAFE-047,Sternschanze Roastery,Medium,63,6111
+CAFE-048,Rotherbaum Roastery,Medium,54,6102
+CAFE-049,Uhlenhorst Roastery,Medium,84,9492
+CAFE-050,St. Georg Roastery,High,66,5874

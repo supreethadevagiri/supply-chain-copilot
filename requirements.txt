@@ -1,0 +1,7 @@
+pandas
+numpy
+pytest
+simple-salesforce
+easypost
+msal
+requests
