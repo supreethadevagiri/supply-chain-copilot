@@ -110,17 +110,12 @@ freight_tracker = pd.DataFrame([
     # export port. Both values are real municipalities present in
     # trase_brazil_coffee.csv, matching the naming Trase uses so the
     # substring lookup in get_trase_deforestation_exposure() resolves.
-    # easypost_tracker_id is optional -- fill in with a real EasyPost test
-    # tracking code (see systems/delivery_system.py) to see the live path
-    # work; left blank, the row just uses these dispatch/arrival dates.
     {"shipment_id": "SHP-2201", "origin": "Santos, Brazil", "origin_municipality": "Poco Fundo",
      "bags_in_transit": 432, "dispatch_date": (TODAY - timedelta(days=18)).date(),
-     "expected_arrival_date": (TODAY + timedelta(days=4)).date(), "status": "In transit",
-     "easypost_tracker_id": ""},
+     "expected_arrival_date": (TODAY + timedelta(days=4)).date(), "status": "In transit"},
     {"shipment_id": "SHP-2202", "origin": "Santos, Brazil", "origin_municipality": "Carmo de Minas",
      "bags_in_transit": 229, "dispatch_date": (TODAY - timedelta(days=9)).date(),
-     "expected_arrival_date": (TODAY + timedelta(days=13)).date(), "status": "In transit",
-     "easypost_tracker_id": ""},
+     "expected_arrival_date": (TODAY + timedelta(days=13)).date(), "status": "In transit"},
 ])
 freight_tracker.to_csv("freight_tracker.csv", index=False)
 

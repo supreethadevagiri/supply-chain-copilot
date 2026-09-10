@@ -16,6 +16,7 @@ live pull fails (no internet, API down, etc.) -- so the rest of the system
 never breaks because of a network hiccup. That fallback behavior is a
 real, honest design choice worth mentioning to Esam, not a workaround.
 """
+import time
 
 import io
 import zipfile
@@ -262,28 +263,31 @@ def get_arabica_futures_price() -> dict:
 # ---------------------------------------------------------------------
 # GDELT -- global news, filtered to Minas Gerais, for climate/political reports
 # ---------------------------------------------------------------------
-def get_gdelt_regional_news(query: str = "Minas Gerais coffee") -> dict:
-    """Real GDELT global news search, filtered to the growing region.
-    Free, public, no API key. Returns recent matching articles as a
-    signal -- the count/presence of matches is the signal, not sentiment
-    analysis (kept simple and explainable)."""
+def get_regional_news(query: str = "Minas Gerais coffee") -> dict:
+    """Real regional news search via Google News RSS. Free, public, no
+    API key or account -- switched from GDELT because GDELT's free tier
+    rate-limits hard under repeated calls, a real risk for a live demo.
+    Returns recent matching articles as a signal -- article
+    count/presence is the signal, not sentiment analysis (kept simple
+    and explainable)."""
+    import xml.etree.ElementTree as ET
+    from urllib.parse import quote
+
     try:
-        resp = requests.get(
-            "https://api.gdeltproject.org/api/v2/doc/doc",
-            params={"query": query, "mode": "artlist", "maxrecords": 10, "format": "json", "timespan": "1week"},
-            timeout=20,
-        )
+        url = f"https://news.google.com/rss/search?q={quote(query)}&hl=en-US&gl=US&ceid=US:en"
+        resp = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
         resp.raise_for_status()
-        data = resp.json()
-        articles = data.get("articles", [])
+        root = ET.fromstring(resp.content)
+        items = root.findall(".//item")
+        headlines = [item.findtext("title") for item in items[:5]]
         return {
-            "article_count_last_week": len(articles),
-            "headlines": [a.get("title") for a in articles[:5]],
-            "signal_triggered": len(articles) >= 3,  # 3+ matching articles in a week = notable
-            "source": "GDELT (live)",
+            "article_count_last_week": len(items),
+            "headlines": headlines,
+            "signal_triggered": len(items) >= 3,  # 3+ matching articles = notable
+            "source": "Google News RSS (live)",
         }
     except Exception as e:
-        print(f"[GDELT] Live pull failed ({e}); assuming no notable news.")
+        print(f"[Regional News] Live pull failed ({e}); assuming no notable news.")
         return {
             "article_count_last_week": 0,
             "headlines": [],
@@ -385,12 +389,23 @@ def get_trase_deforestation_exposure(municipality: str, state: str = "MINAS GERA
         # threshold, not an arbitrary hardcoded cutoff.
         elevated = bool(muni_avg_intensity > state_median_intensity * 1.5)
 
+        plain_language = (
+            f"flagged for deforestation risk (land use "
+            f"{round(float(muni_avg_intensity), 2)} hectares per ton, "
+            f"versus a state median of {round(float(state_median_intensity), 2)})"
+            if elevated else
+            f"NOT flagged for deforestation risk (land use "
+            f"{round(float(muni_avg_intensity), 2)} hectares per ton, "
+            f"close to the state median of {round(float(state_median_intensity), 2)})"
+        )
+
         return {
             "municipality": municipality,
             "found_in_dataset": True,
             "land_use_intensity_ha_per_ton": round(float(muni_avg_intensity), 2),
             "state_median_land_use_intensity_ha_per_ton": round(float(state_median_intensity), 2),
             "deforestation_risk_flag": elevated,
+            "deforestation_plain_language": plain_language,
             "note": (
                 "Flag is based on land-use intensity (hectares per ton "
                 "shipped) relative to the Minas Gerais state median in "
@@ -399,11 +414,11 @@ def get_trase_deforestation_exposure(municipality: str, state: str = "MINAS GERA
             ),
             "source": "Trase.earth Brazil coffee dataset (cached, 2016-2017, real data)",
         }
-    except FileNotFoundError:
-        print(f"[Trase.earth] {TRASE_CSV_PATH} not found -- download it manually first (see comment above).")
+    except Exception as e:
+        print(f"[Trase.earth] Live lookup failed ({e}); treating as not found in dataset.")
         return {
             "municipality": municipality,
             "found_in_dataset": False,
             "deforestation_risk_flag": None,
-            "source": "Trase CSV not downloaded yet",
+            "source": f"unavailable ({e.__class__.__name__})",
         }

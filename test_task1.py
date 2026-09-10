@@ -2,7 +2,7 @@
 Test suite for Task 1. Run with: pytest test_task1.py -v
 
 These tests run against the LOCAL FALLBACK data by default (no
-Salesforce/EasyPost/Outlook credentials required), so they stay green
+Salesforce/Shippo/Gmail credentials required), so they stay green
 whether or not real-system setup is finished yet. Once credentials are
 set as environment variables, the same functions automatically switch
 to live data -- rerun the suite then to sanity-check the live path too.
@@ -39,7 +39,7 @@ def test_intransit_stock_is_non_negative():
 def test_intransit_shipments_each_report_a_source():
     result = get_intransit_stock()
     for shipment in result["shipments"]:
-        assert shipment["source"] in ("easypost_live", "local_fallback")
+        assert shipment["source"] in ("shippo_live", "local_fallback")
 
 
 def test_supplier_email_delay_flag_is_deterministic():
@@ -111,4 +111,41 @@ def test_get_stock_position_accounts_at_risk_empty_iff_enough_stock():
 def test_get_stock_position_reports_source_for_each_swapped_system():
     result = get_stock_position()
     assert result["crm_source"] in ("salesforce_live", "local_fallback_csv")
-    assert result["supplier_email_source"] in ("outlook_live", "local_fallback_csv")
+    assert result["supplier_email_source"] in ("gmail_live", "local_fallback_csv")
+
+
+def test_rank_exposed_accounts_includes_zero_bag_commitment():
+    """A cafe committed to 0 bags contributes nothing to closing the
+    shortfall, but the ranking logic doesn't skip it -- it still gets
+    included if it's next in priority order. Documenting this as real
+    behavior, not assuming it's a bug."""
+    accounts = [
+        {"cafe_name": "Zero Bags Cafe", "contract_priority": "Low", "committed_bags": 0, "monthly_revenue_eur": 100},
+        {"cafe_name": "Real Cafe", "contract_priority": "Low", "committed_bags": 50, "monthly_revenue_eur": 200},
+    ]
+    result = rank_exposed_accounts(shortfall_bags=50, accounts=accounts)
+    names = [a["cafe_name"] for a in result["accounts_at_risk"]]
+    assert "Zero Bags Cafe" in names
+    assert "Real Cafe" in names
+
+
+def test_rank_exposed_accounts_handles_duplicate_cafe_names():
+    """Two accounts with the identical cafe_name are treated as
+    separate entries, not merged or deduplicated."""
+    accounts = [
+        {"cafe_name": "Duplicate Cafe", "contract_priority": "Low", "committed_bags": 30, "monthly_revenue_eur": 100},
+        {"cafe_name": "Duplicate Cafe", "contract_priority": "Low", "committed_bags": 40, "monthly_revenue_eur": 150},
+    ]
+    result = rank_exposed_accounts(shortfall_bags=50, accounts=accounts)
+    assert len(result["accounts_at_risk"]) == 2
+
+
+def test_rank_exposed_accounts_shortfall_exceeds_all_available_accounts():
+    """If the shortfall is bigger than every account combined could
+    ever cover, the function returns every account it has rather than
+    crashing or looping forever."""
+    accounts = [
+        {"cafe_name": "Only Cafe", "contract_priority": "Low", "committed_bags": 10, "monthly_revenue_eur": 100},
+    ]
+    result = rank_exposed_accounts(shortfall_bags=1000, accounts=accounts)
+    assert result["accounts_at_risk"] == accounts

@@ -1,3 +1,0 @@
-supplier,role,lead_time_days,minimum_volume_clause_bags_per_quarter,exclusivity,payment_terms
-Minas Gerais Cooperative,current,21,450,False,30 days after delivery
-Sao Paulo Cooperative (backup),backup,10,0,False,"50% upfront, 50% on delivery"

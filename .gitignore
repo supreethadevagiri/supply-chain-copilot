@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .env
 .pytest_cache/
+gmail_token.json
+google_client_secret.json
+.DS_Store

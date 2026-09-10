@@ -1,10 +1,11 @@
 """
 Task 1 -- Stock Position (real systems version)
-Same combined logic as before, but CRM, Guaranteed Delivery, and
-Supplier Email now come from real systems (Salesforce, EasyPost,
-Outlook) instead of CSV files -- see systems/. Warehouse stock, order
-history, and supplier contracts stay as local records since those
-weren't part of the system-swap requirement.
+CRM, in-transit delivery tracking, supplier email, and warehouse
+stock all come from real systems (Salesforce, Shippo, Gmail) instead
+of CSV files -- see systems/. Each falls back to a local CSV
+automatically if the live system is unavailable. Order history and
+supplier contracts stay as local records since those weren't part of
+the system-swap requirement.
 """
 
 import pandas as pd
@@ -13,22 +14,19 @@ from datetime import datetime
 from systems.crm_system import get_crm_commitments
 from systems.delivery_system import get_intransit_stock
 from systems.email_system import check_supplier_emails
+from systems.warehouse_system import get_warehouse_lots
 
 DATA_DIR = "data"
-TODAY = datetime(2026, 8, 6)
+TODAY = datetime.now()
 
 
 def get_warehouse_stock() -> dict:
     """Current stock balance, reconciled across both Hamburg storage
-    sites. Unchanged from the original -- not one of the three systems
-    the brief asked to replace."""
-    df = pd.read_csv(f"{DATA_DIR}/warehouse_stock.csv")
-    by_site = df.groupby("site")["bags"].sum().to_dict()
-    return {
-        "total_bags": int(df["bags"].sum()),
-        "by_site": {k: int(v) for k, v in by_site.items()},
-        "lots": df.to_dict(orient="records"),
-    }
+    sites. Now reads live from Salesforce's Warehouse_Lot__c object
+    (systems/warehouse_system.py), with the original local CSV kept
+    as an automatic fallback -- same live-then-fallback pattern as
+    CRM, Shippo, and Gmail elsewhere in this project."""
+    return get_warehouse_lots()
 
 
 def calculate_reorder_timing(current_stock_bags: int) -> dict:
@@ -95,7 +93,7 @@ def get_stock_position() -> dict:
     warehouse = get_warehouse_stock()
     crm = get_crm_commitments()          # Salesforce, or fallback
     intransit = get_intransit_stock()    # EasyPost, or fallback
-    emails = check_supplier_emails()     # Outlook, or fallback
+    emails = check_supplier_emails()     # Gmail, or fallback
 
     total_available = warehouse["total_bags"] + intransit["total_intransit_bags"]
     net_position_bags = total_available - crm["total_committed_bags"]
@@ -127,6 +125,7 @@ def get_stock_position() -> dict:
 
     return {
         "warehouse_stock_bags": warehouse["total_bags"],
+        "warehouse_source": warehouse.get("source"),
         "stock_by_site": warehouse["by_site"],
         "crm_committed_bags": crm["total_committed_bags"],
         "crm_source": crm.get("source"),
@@ -142,6 +141,52 @@ def get_stock_position() -> dict:
         "reorder_by_date": reorder_info["reorder_by_date"],
         "supplier_lead_time_days": reorder_info["supplier_lead_time_days"],
         "accounts_at_risk": exposure["accounts_at_risk"],
+    }
+
+
+
+
+def get_stock_position_hypothetical(warehouse_bag_delta: int = 0, cafe_bag_delta: int = 0) -> dict:
+    """Answers a 'what if' question WITHOUT touching any real data --
+    takes the real current numbers, applies ONE named change in
+    memory only, and recalculates using the exact same real formulas
+    as get_stock_position(). Nothing is written anywhere; calling this
+    twice in a row always gives the same result, since it starts from
+    whatever the real current numbers actually are right now."""
+    warehouse = get_warehouse_stock()
+    crm = get_crm_commitments()
+    intransit = get_intransit_stock()
+
+    real_warehouse_bags = warehouse["total_bags"]
+    real_committed_bags = crm["total_committed_bags"]
+
+    hypothetical_warehouse_bags = real_warehouse_bags + warehouse_bag_delta
+    hypothetical_committed_bags = real_committed_bags + cafe_bag_delta
+
+    hypothetical_total_available = hypothetical_warehouse_bags + intransit["total_intransit_bags"]
+    hypothetical_net_position = hypothetical_total_available - hypothetical_committed_bags
+    hypothetical_is_short = hypothetical_net_position < 0
+    hypothetical_shortfall = abs(hypothetical_net_position) if hypothetical_is_short else 0
+    hypothetical_reorder_info = calculate_reorder_timing(hypothetical_warehouse_bags)
+
+    real_total_available = real_warehouse_bags + intransit["total_intransit_bags"]
+    real_net_position = real_total_available - real_committed_bags
+
+    return {
+        "scenario": (
+            f"Hypothetical: warehouse stock changed by {warehouse_bag_delta:+d} bags, "
+            f"cafe commitments changed by {cafe_bag_delta:+d} bags."
+        ),
+        "real_current_status": "short" if real_net_position < 0 else "enough",
+        "real_current_net_position_bags": real_net_position,
+        "hypothetical_status": "short" if hypothetical_is_short else "enough",
+        "hypothetical_warehouse_stock_bags": hypothetical_warehouse_bags,
+        "hypothetical_crm_committed_bags": hypothetical_committed_bags,
+        "hypothetical_net_position_bags": hypothetical_net_position,
+        "hypothetical_shortfall_bags": hypothetical_shortfall,
+        "hypothetical_coverage_days": hypothetical_reorder_info["coverage_days"],
+        "hypothetical_reorder_by_date": hypothetical_reorder_info["reorder_by_date"],
+        "note": "This is a hypothetical calculation only -- no real data was changed.",
     }
 
 

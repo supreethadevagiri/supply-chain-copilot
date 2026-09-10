@@ -1,3 +1,6 @@
-shipment_id,origin,origin_municipality,bags_in_transit,dispatch_date,expected_arrival_date,status,easypost_tracker_id
-SHP-2201,"Santos, Brazil",Poco Fundo,432,2026-07-19,2026-08-10,In transit,
-SHP-2202,"Santos, Brazil",Carmo de Minas,229,2026-07-28,2026-08-19,In transit,
+shipment_id,origin,origin_municipality,bags_in_transit,dispatch_date,expected_arrival_date,status,shippo_carrier,shippo_tracking_number
+SHP-2201,"Santos, Brazil",Poco Fundo,432,2026-07-19,2026-08-10,In transit,shippo,SHIPPO_TRANSIT
+SHP-2202,"Santos, Brazil",Carmo de Minas,229,2026-07-28,2026-08-19,In transit,,
+SHP-2203,"Santos, Brazil",Poco Fundo,300,2026-08-01,2026-08-23,In transit,shippo,SHIPPO_TRANSIT
+SHP-2204,"Santos, Brazil",Carmo de Minas,250,2026-08-05,2026-08-27,In transit,,
+SHP-2205,"Santos, Brazil",Manhuacu,180,2026-08-10,2026-09-02,Delayed,shippo,SHIPPO_TRANSIT

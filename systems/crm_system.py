@@ -1,64 +1,67 @@
 """
 CRM System -- Salesforce integration for Task 1.
-Replaces crm_commitments.csv as the source of truth. Real system:
-Salesforce (free Developer Edition org -- instant signup, no approval
-wait).
+Uses OAuth Client Credentials flow (Consumer Key + Consumer Secret from
+an External Client App) instead of username/password -- required since
+this org has SOAP API login disabled.
 
 SETUP:
-1. Sign up: https://developer.salesforce.com/signup
-2. In Setup -> Object Manager -> Create -> Custom Object, create
-   "Cafe Account" (API name auto-fills to Cafe_Account__c) with fields:
-     - Contract_Priority__c   (Picklist: High, Medium, Low)
-     - Committed_Bags__c      (Number, 0 decimal places)
-     - Monthly_Revenue_EUR__c (Number, 0 decimal places)
-   Use the object's standard Name field for the cafe name.
-3. Load your 50 cafe accounts in via Setup -> Data Import Wizard
-   (you can export crm_commitments.csv from data/ and import it directly
-   -- the column names won't match exactly, map them in the wizard).
-4. Get your security token: Settings -> My Personal Information ->
-   Reset My Security Token (emailed to you).
-5. Set environment variables:
-     SF_USERNAME=you@yourorg.com
-     SF_PASSWORD=your_login_password
-     SF_SECURITY_TOKEN=the_token_from_step_4
+1. In Salesforce: Setup -> App Manager -> New External Client App
+   -> enable OAuth, add scope "Full access (full)" and
+   "Perform requests at any time (refresh_token, offline_access)",
+   enable Client Credentials Flow.
+2. Under the app's Settings tab -> OAuth Settings -> Consumer Key and
+   Secret -- copy both.
+3. Set environment variables:
+     SF_CLIENT_ID=<Consumer Key>
+     SF_CLIENT_SECRET=<Consumer Secret>
+     SF_DOMAIN=<your My Domain, e.g. orgfarm-xxxxx-dev-ed.develop.my.salesforce.com>
 
-Falls back to the local synthetic CSV if credentials aren't set, so
-Task 1 keeps working end-to-end while Salesforce setup is in progress.
-Every response says which source it actually came from -- never silently
-pretend fallback data is live.
+Falls back to the local synthetic CSV if these aren't set.
 """
 
 import os
+import requests
 import pandas as pd
 
 DATA_DIR = "data"
 
 
-def _get_sf_connection():
-    """Returns an authenticated Salesforce connection, or None if
-    credentials aren't configured yet."""
-    username = os.environ.get("SF_USERNAME")
-    password = os.environ.get("SF_PASSWORD")
-    token = os.environ.get("SF_SECURITY_TOKEN")
-    if not (username and password and token):
-        return None
-    from simple_salesforce import Salesforce
-    return Salesforce(username=username, password=password, security_token=token)
+def _get_sf_access_token():
+    client_id = os.environ.get("SF_CLIENT_ID")
+    client_secret = os.environ.get("SF_CLIENT_SECRET")
+    domain = os.environ.get("SF_DOMAIN")
+    if not (client_id and client_secret and domain):
+        return None, None
+
+    url = f"https://{domain}/services/oauth2/token"
+    resp = requests.post(url, data={
+        "grant_type": "client_credentials",
+        "client_id": client_id,
+        "client_secret": client_secret,
+    })
+    resp.raise_for_status()
+    data = resp.json()
+    return data["access_token"], data["instance_url"]
 
 
 def get_crm_commitments() -> dict:
     """Coffee already promised to cafe customers. Pulls live from
     Salesforce's Cafe_Account__c object if credentials are configured;
-    otherwise falls back to the local synthetic CSV (same shape) so
-    development isn't blocked on Salesforce setup."""
-    sf = _get_sf_connection()
+    otherwise falls back to the local synthetic CSV."""
+    token, instance_url = _get_sf_access_token()
 
-    if sf is not None:
+    if token:
         query = (
             "SELECT Name, Contract_Priority__c, Committed_Bags__c, "
             "Monthly_Revenue_EUR__c FROM Cafe_Account__c"
         )
-        records = sf.query_all(query)["records"]
+        resp = requests.get(
+            f"{instance_url}/services/data/v59.0/query",
+            headers={"Authorization": f"Bearer {token}"},
+            params={"q": query},
+        )
+        resp.raise_for_status()
+        records = resp.json()["records"]
         accounts = [
             {
                 "cafe_name": r["Name"],
@@ -74,7 +77,6 @@ def get_crm_commitments() -> dict:
             "source": "salesforce_live",
         }
 
-    # Fallback: local synthetic CSV, identical shape to the live response
     df = pd.read_csv(f"{DATA_DIR}/crm_commitments.csv")
     accounts = [
         {

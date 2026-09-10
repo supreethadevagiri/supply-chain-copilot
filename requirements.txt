@@ -2,6 +2,10 @@ pandas
 numpy
 pytest
 simple-salesforce
-easypost
+shippo
 msal
 requests
+streamlit
+langgraph
+langchain
+langchain-ollama

@@ -1,3 +1,170 @@
 timestamp,task,query,latency_seconds
 2026-08-12T12:52:57,risk_assessment,is SHP-2201 at risk?,31.72
 2026-08-12T13:15:56,risk_assessment,SHP-2201 at risk?,67.26
+2026-08-26T08:48:03,sourcing_decision,should we switch to our backup supplier?,6.73
+2026-08-26T08:52:09,sourcing_decision,should we switch to our backup supplier?,14.24
+2026-08-26T08:53:43,sourcing_decision,should we switch to our backup supplier?,11.71
+2026-08-26T13:47:12,stock_position,do we have enough stock?,20.06
+2026-08-26T13:48:09,risk_assessment,has Minas Gerais Cooperative sent us any warning emails?,20.43
+2026-08-26T14:18:21,risk_assessment,what should i be worried about this week?,42.54
+2026-08-26T14:54:30,sourcing_decision,should we switch to our backup supplier?,20.64
+2026-08-26T15:20:48,stock_position,is there a supplier delay affecting our current stock position?,18.88
+2026-08-26T15:31:32,risk_assessment,is SHP-2201 at risk?,23.89
+2026-08-26T15:44:44,stock_position,do we have enough stock?,24.6
+2026-09-01T15:58:59,stock_position,do we have enough stock?,22.15
+2026-09-01T16:18:09,stock_position,do we have enough stock?,18.77
+2026-09-01T16:18:46,sourcing_decision,should we switch to our backup supplier?,20.25
+2026-09-01T16:27:12,stock_position,do we have enough stock?,20.99
+2026-09-01T16:27:44,stock_position,do we have enough stock?,19.96
+2026-09-01T18:01:28,stock_position,do we have enough stock?,21.04
+2026-09-01T18:09:19,stock_position,do we have enough stock?,23.72
+2026-09-01T18:28:25,stock_position,do we have enough stock?,21.37
+2026-09-02T12:52:40,stock_position,do we have enough stock?,6.36
+2026-09-02T12:56:50,stock_position,do we have enough stock?,15.78
+2026-09-02T12:57:30,stock_position,when do we need to reorder?,24.43
+2026-09-02T12:58:31,risk_assessment,is there a supplier delay affecting our current stock position?,44.37
+2026-09-02T12:59:33,risk_assessment,is SHP-2201 at risk?,43.61
+2026-09-02T13:00:58,risk_assessment,what should I be worried about this week?,69.15
+2026-09-02T13:01:54,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,37.23
+2026-09-02T13:03:39,risk_assessment,is SHP-2201 at risk?,32.92
+2026-09-02T13:04:46,risk_assessment,what should I be worried about this week?,53.4
+2026-09-02T13:08:41,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,26.0
+2026-09-02T13:09:25,sourcing_decision,should we switch to our backup supplier?,32.3
+2026-09-02T13:10:05,sourcing_decision,how reliant are we on one supplier region?,28.33
+2026-09-02T13:11:42,sourcing_decision,would switching to our backup supplier break our current contract?,36.4
+2026-09-02T14:36:32,stock_position,do we have enough stock?,20.47
+2026-09-02T14:38:55,stock_position,when do we need to reorder?,19.78
+2026-09-02T14:40:32,risk_assessment,is SSH-2201 at rsisk?,25.57
+2026-09-02T14:44:56,stock_position,how many days of coverage do we have left?,22.28
+2026-09-07T13:02:44,stock_position,"""Are we short or do we have a surplus?""",19.66
+2026-09-07T13:09:46,stock_position,how many days of coverage do we have left?,19.31
+2026-09-07T13:10:42,stock_position,are we short or do we have a surplus?,15.67
+2026-09-07T13:15:33,stock_position,how many days of coverage do we have left?,13.08
+2026-09-07T13:16:11,stock_position,are we short or do we have a surplus?,14.45
+2026-09-07T13:16:55,stock_position,do we have enough stock?,15.33
+2026-09-07T14:46:39,stock_position,do we have enough stock?,21.8
+2026-09-07T14:47:47,risk_assessment,is Eppendorf Roastery at risk?,27.41
+2026-09-07T14:48:40,stock_position,how much stock do we have in the warehouse?,11.27
+2026-09-07T14:54:08,stock_position,how much stock is in transit?,16.51
+2026-09-07T14:54:33,stock_position,how many bags have our cafes committed to?,9.11
+2026-09-07T14:55:08,stock_position,how many bags has Eppendorf Roastery committed to?,9.46
+2026-09-07T14:55:45,stock_position,is Eppendorf Roastery affected by the stock shortage?,10.27
+2026-09-08T11:51:25,stock_position,is Eppendorf Roastery at risk?,14.44
+2026-09-08T11:51:52,stock_position,is Elbufer Roastery at risk of being affected?,9.39
+2026-09-08T11:52:39,risk_assessment,is SHP-2201 at risk?,24.23
+2026-09-08T11:55:15,stock_position,is Eppendorf Roastery at risk?,11.38
+2026-09-08T11:55:38,stock_position,is Elbufer Roastery at risk of being affected?,10.11
+2026-09-08T11:56:40,risk_assessment,is SHP-2201 at risk?,19.99
+2026-09-08T13:34:17,stock_position,is Eppendorf Roastery at risk?,14.46
+2026-09-08T13:34:46,stock_position,is Elbufer Roastery at risk of being affected?,9.71
+2026-09-08T13:35:19,risk_assessment,is SHP-2201 at risk?,19.16
+2026-09-08T14:21:34,risk_assessment,is SHP-2201 at risk?,20.28
+2026-09-08T14:21:57,risk_assessment,why did you decide that?,14.35
+2026-09-08T14:59:22,risk_assessment,is SHP-2201 at risk?,23.92
+2026-09-08T14:59:52,risk_assessment,why did you decide that?,18.38
+2026-09-08T15:04:35,risk_assessment,is SHP-2201 at risk?,24.62
+2026-09-08T15:05:53,risk_assessment,why did you decide that?,14.88
+2026-09-08T15:37:18,stock_position,do we have enough stock?,23.19
+2026-09-08T15:38:00,stock_position,how many days of coverage do we have left?,12.71
+2026-09-08T15:38:35,stock_position,why did you decide that?,14.26
+2026-09-08T15:39:55,stock_position,how many bags have our cafes committed to?,14.18
+2026-09-08T15:40:41,stock_position,when do we need to reorder?,10.95
+2026-09-08T15:41:07,stock_position,why did u decide that?,7.25
+2026-09-08T15:52:18,stock_position,when do we need to reorder?,17.54
+2026-09-08T15:52:46,stock_position,why did you decide that?,13.11
+2026-09-08T15:53:35,stock_position,do we have enough stock?,17.9
+2026-09-08T15:55:50,stock_position,IMPORTS CLEAN,20.1
+2026-09-08T15:56:37,risk_assessment,=============================== warnings summary ===============================,41.73
+2026-09-08T15:57:02,risk_assessment,test_task1.py::test_supplier_email_delay_flag_is_deterministic,19.19
+2026-09-08T15:57:28,risk_assessment,"warnings.warn(message, FutureWarning)",18.87
+2026-09-08T16:11:34,stock_position,do we have enough stock?,24.58
+2026-09-08T16:12:11,stock_position,why did you decide that?,25.9
+2026-09-08T16:21:33,stock_position,do we have enough stock?,24.89
+2026-09-08T16:22:21,stock_position,why did you decide that?,17.91
+2026-09-08T16:26:18,stock_position,how much stock do we have in the warehouse?,13.32
+2026-09-08T16:27:15,stock_position,how much stock is in transit?,14.52
+2026-09-08T17:21:59,stock_position,how many bags has Eppendorf Roastery committed to?,18.04
+2026-09-08T17:49:38,risk_assessment,is SHP-2201 at risk?,27.97
+2026-09-08T17:50:56,risk_assessment,is there a backup supplier available for SHP-2201?,14.66
+2026-09-08T17:51:47,risk_assessment,why did you decide that?,13.77
+2026-09-08T17:52:28,risk_assessment,is SHP-2202 at risk?,19.78
+2026-09-08T17:57:49,sourcing_decision,is there a backup supplier available for SHP-2201?,6.24
+2026-09-08T18:27:03,risk_assessment,is there a backup supplier available for SHP-2201?,20.04
+2026-09-08T18:29:17,risk_assessment,why did you decide that?,17.8
+2026-09-08T18:30:21,risk_assessment,what should I be worried about this week?,37.33
+2026-09-08T18:32:22,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,13.77
+2026-09-08T18:33:06,risk_assessment,what's the estimated price increase?,13.52
+2026-09-08T18:33:39,risk_assessment,why did you decide that?,16.08
+2026-09-08T18:34:00,risk_assessment,how many of the six checks showed a warning sign?,12.28
+2026-09-08T19:31:36,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,20.78
+2026-09-08T20:04:52,risk_assessment,what should I be worried about this week?,43.26
+2026-09-08T20:05:43,risk_assessment,what should I be worried about this week?,38.71
+2026-09-08T20:06:25,risk_assessment,is Poço Fundo flagged for deforestation risk?,15.88
+2026-09-08T20:25:46,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,23.05
+2026-09-08T20:26:24,risk_assessment,is Poço Fundo flagged for deforestation risk?,19.63
+2026-09-08T20:27:26,risk_assessment,what should I be worried about this week?,44.98
+2026-09-08T23:37:57,risk_assessment,is Poço Fundo flagged for deforestation risk?,28.27
+2026-09-08T23:48:43,risk_assessment,is Poço Fundo flagged for deforestation risk?,21.87
+2026-09-09T00:08:49,risk_assessment,cat > /tmp/fix_poco_fundo_bypass.py << 'PYEOF',30.49
+2026-09-09T00:09:11,risk_assessment,"with open(""graph.py"", ""r"") as f:",17.16
+2026-09-09T00:09:34,risk_assessment,content = f.read(),17.93
+2026-09-09T00:09:57,risk_assessment,# Add the two imports needed for the bypass,18.16
+2026-09-09T00:14:06,risk_assessment,is Minas Gerais currently flagged for deforestation risk?,17.0
+2026-09-09T00:14:46,risk_assessment,is SHP-2201 at risk?,14.9
+2026-09-09T00:19:22,risk_assessment,is SHP-2201 at risk?,18.98
+2026-09-09T00:33:19,sourcing_decision,should we switch to our backup supplier?,30.31
+2026-09-09T00:34:13,sourcing_decision,would switching to our backup supplier break our current contract?,14.9
+2026-09-09T00:34:52,sourcing_decision,how reliant are we on one supplier region?,13.44
+2026-09-09T00:35:17,sourcing_decision,why did you decide that?,13.85
+2026-09-09T00:46:33,sourcing_decision,should we switch to our backup supplier?,19.12
+2026-09-09T00:47:46,risk_assessment,how reliant are we on one supplier region?,22.83
+2026-09-09T00:48:26,sourcing_decision,why did you decide that?,15.2
+2026-09-09T09:24:26,sourcing_decision,should we switch to our backup supplier?,20.38
+2026-09-09T09:25:10,risk_assessment,how reliant are we on one supplier region?,21.83
+2026-09-09T09:31:49,sourcing_decision,why did you decide that?,13.75
+2026-09-09T09:39:31,sourcing_decision,should we switch to our backup supplier?,22.25
+2026-09-09T09:42:08,sourcing_decision,how reliant are we on one supplier region?,15.8
+2026-09-09T14:16:44,stock_position,do we have enough stock?,10.69
+2026-09-09T14:19:17,stock_position,do we have enough stock?,16.18
+2026-09-09T14:37:05,risk_assessment,what should I be worried about this week?,67.67
+2026-09-09T14:38:02,risk_assessment,is SHP-2205 at risk?,21.47
+2026-09-09T14:44:54,risk_assessment,what should I be worried about this week?,78.17
+2026-09-09T14:53:18,risk_assessment,what should I be worried about this week?,52.28
+2026-09-09T15:06:00,stock_position,do we have enough stock?,22.89
+2026-09-09T16:41:48,stock_position,do we have enough stock?,21.59
+2026-09-09T17:58:54,stock_position,do we have enough stock?,21.18
+2026-09-09T17:59:41,stock_position,how much stock do we have in the warehouse?,10.32
+2026-09-09T20:39:33,stock_position,what if we added 300 bags to the warehouse?,18.61
+2026-09-09T20:40:35,risk_assessment,what if the currency also moved for SHP-2201?,36.59
+2026-09-09T20:41:47,risk_assessment,what if the contract had no minimum order clause?,19.04
+2026-09-09T23:43:26,risk_assessment,what if the currency also moved for SHP-2201?,29.24
+2026-09-09T23:44:23,sourcing_decision,what if the contract had no minimum order clause?,26.15
+2026-09-09T23:53:21,sourcing_decision,what if the contract had no minimum order clause?,22.22
+2026-09-09T23:59:27,sourcing_decision,what if the contract had no minimum order clause?,18.68
+2026-09-10T00:51:42,stock_position,Do we have enough stock?,21.1
+2026-09-10T01:20:22,risk_assessment,is SHP-2201 at risk?,31.96
+2026-09-10T01:21:25,stock_position,what if we added 300 bags to the warehouse?,20.13
+2026-09-10T01:36:36,stock_position,do we have enough stock?,21.71
+2026-09-10T01:47:11,risk_assessment,is SHP-2201 at risk?,35.02
+2026-09-10T02:16:38,sourcing_decision,"what if the contract had no minimum order clause?
+",18.65
+2026-09-10T02:18:08,risk_assessment,what if the currency also moved for SHP-2201?,31.56
+2026-09-10T02:29:57,risk_assessment,what if the currency also moved for SHP-2201?,27.05
+2026-09-10T13:31:15,stock_position,do we have enough stock?,23.47
+2026-09-10T14:02:25,risk_assessment,is SHP-2202 at risk?,36.33
+2026-09-10T14:13:35,risk_assessment,is SHP-2202 at risk?,51.56
+2026-09-10T14:20:38,risk_assessment,what should I be worried about this week?,61.79
+2026-09-10T14:27:51,risk_assessment,is there a backup supplier available for SHP-2201?,44.94
+2026-09-10T14:33:34,risk_assessment,what's the estimated price increase?,55.22
+2026-09-10T15:33:15,stock_position,do we have enough stock?,21.87
+2026-09-10T15:33:52,stock_position,why did you decide that?,6.0
+2026-09-10T15:35:09,risk_assessment,is SHP-2201 at risk?,33.6
+2026-09-10T15:35:31,risk_assessment,why did you decide that?,5.68
+2026-09-10T15:36:24,sourcing_decision,should we switch to our backup supplier?,33.4
+2026-09-10T15:36:47,sourcing_decision,why did you decide that?,15.04
+2026-09-10T15:37:16,stock_position,what if we added 300 bags to the warehouse?,12.33
+2026-09-10T15:37:50,risk_assessment,what if the currency also moved for SHP-2201?,17.4
+2026-09-10T15:47:21,stock_position,do we have enough stock?,22.26
+2026-09-10T15:47:41,stock_position,why did you decide that?,6.32
+2026-09-10T15:48:34,risk_assessment,is SHP-2201 at risk?,30.57
+2026-09-10T15:49:09,risk_assessment,why did you decide that?,17.54
