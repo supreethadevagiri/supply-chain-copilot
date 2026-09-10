@@ -14,7 +14,7 @@ has been updated to match (see the revised project brief).
 Both functions below fall back to typical-year reference values if the
 live pull fails (no internet, API down, etc.) -- so the rest of the system
 never breaks because of a network hiccup. That fallback behavior is a
-real, honest design choice worth mentioning to Esam, not a workaround.
+deliberate, honest design choice, not a workaround.
 """
 import time
 

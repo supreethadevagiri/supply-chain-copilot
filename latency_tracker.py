@@ -1,8 +1,7 @@
 """
-Latency tracking for the evaluation dashboard (Tech Stack item 7).
-Every agent response gets timed and logged here -- this is what lets
-"latency" actually be answered with a real number instead of a guess,
-satisfying requirement #3 on Esam's list.
+Latency tracking for evaluation and observability.
+Every agent response is timed and logged here, so response latency
+can be reported as a real measured number instead of an estimate.
 """
 
 import time

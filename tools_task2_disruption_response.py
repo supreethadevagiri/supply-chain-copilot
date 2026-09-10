@@ -1,8 +1,8 @@
 """
 Task 2 -- Disruption Response
-Adds the two pieces the professor asked for on top of the existing
-six-signal risk detection (tools_task2_risk_assessment.py, unchanged):
-alarm the company when a disruption is confirmed, suggest an
+Adds two pieces on top of the existing six-signal risk detection
+(tools_task2_risk_assessment.py, unchanged): alarm the company when a
+disruption is confirmed, suggest an
 alternative source to cover it, and if no source is available, report
 that price will rise by X%.
 """
