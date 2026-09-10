@@ -32,6 +32,27 @@ Checks Salesforce (contract terms) and Trase.earth (backup region's deforestatio
 - Supports real "why did you decide that" follow-ups
 - Supports real "what if" hypothetical questions (e.g. "what if we added 300 bags"), clearly labeled as hypothetical, never confused with real data
 
+## Real data sources used, per task
+
+### Task 1 -- Stock Position
+- **Salesforce** -- cafe account commitments and warehouse lot records. https://www.salesforce.com/
+- **Shippo** -- in-transit shipment tracking. https://goshippo.com/
+- **Gmail** -- live search of the supplier's inbox for delay-related emails. https://developers.google.com/gmail/api
+
+### Task 2 -- Risk Assessment (6 independent real signals)
+- **Yahoo Finance** -- coffee futures price (ticker KC=F). https://finance.yahoo.com/quote/KC=F/
+- **Google News** -- live regional news search. https://news.google.com/
+- **Trase.earth** -- deforestation / land-use dataset. https://trase.earth/
+- **USDA FAS PSD Online** -- export volume benchmarks. https://apps.fas.usda.gov/psdonline/
+- **Frankfurter / ECB** -- currency exchange rates. https://www.frankfurter.app/ (data from the European Central Bank, https://www.ecb.europa.eu/)
+- **Gmail** -- same live supplier inbox check as Task 1.
+
+### Task 3 -- Sourcing Decision
+- **Salesforce** -- real contract terms, including the minimum-order clause. https://www.salesforce.com/
+- **Trase.earth** -- deforestation exposure for the backup supplier's region. https://trase.earth/
+
+Every one of these is checked live wherever possible, with a local CSV fallback if the live system is unavailable -- see `data/` for the fallback files and `systems/` for each live integration.
+
 ## Setup -- what to install
 
 **1. Clone the repo and install Python dependencies:**
